@@ -22714,3 +22714,61 @@
 2023-12-30 09:45:29:wordhoard.utilities.cloudflare_bypass:INFO: Requested URL: https://www.collinsdictionary.com/dictionary/english-thesaurus/rod
 2023-12-30 09:45:29:wordhoard.utilities.cloudflare_bypass:INFO: --------------------------------------------------------------------------------
 2023-12-30 09:45:31:wordhoard.antonyms:INFO: Thesaurus.com had no antonym reference for the word rod
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: The requested URL is protected by Cloudflare's DDoS mitigation service.
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: Requested URL: https://www.collinsdictionary.com/dictionary/english-thesaurus/deploy
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:20:wordhoard.utilities.request_html:ERROR: Response Status Code: 404
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: The HTTP 404 Not Found status code means that the file or page that the was requested was not found on the server
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: Requested URL: https://www.thesaurus.com/browse/deploy
+2024-01-11 02:51:20:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:20:wordhoard.dictionary:INFO: Thesaurus.com had no definition reference for the word deploy
+2024-01-11 02:51:22:wordhoard.dictionary:ERROR: A KeyError occurred in the following code segment:
+2024-01-11 02:51:22:wordhoard.dictionary:ERROR:   File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\dictionary.py", line 483, in _query_synonym_com
+    self._update_cache(part_of_speech_category, definition_list)
+  File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\dictionary.py", line 137, in _update_cache
+    caching.insert_word_cache_definition(self._word, pos_category, definition)
+  File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\utilities\caching.py", line 85, in insert_word_cache_definition
+    temporary_dict_definition[word][pos_category] += deduplicated_values
+
+2024-01-11 02:51:25:wordhoard.utilities.cloudflare_bypass:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:25:wordhoard.utilities.cloudflare_bypass:INFO: Cloudflare DDoS mitigation service protection bypass successful.
+2024-01-11 02:51:25:wordhoard.utilities.cloudflare_bypass:INFO: Requested URL: https://www.collinsdictionary.com/dictionary/english-thesaurus/deploy
+2024-01-11 02:51:25:wordhoard.utilities.cloudflare_bypass:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: The requested URL is protected by Cloudflare's DDoS mitigation service.
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: Requested URL: https://www.collinsdictionary.com/dictionary/english-thesaurus/deploy
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:29:wordhoard.utilities.request_html:ERROR: Response Status Code: 404
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: The HTTP 404 Not Found status code means that the file or page that the was requested was not found on the server
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: Requested URL: https://www.thesaurus.com/browse/deploy
+2024-01-11 02:51:29:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:29:wordhoard.synonyms:INFO: Thesaurus.com had no synonym reference for the word deploy
+2024-01-11 02:51:29:wordhoard.synonyms:ERROR: A KeyError occurred in the following code segment:
+2024-01-11 02:51:29:wordhoard.synonyms:ERROR:   File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\synonyms.py", line 412, in _query_merriam_webster
+    self._update_cache(part_of_speech_category, synonyms_list)
+  File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\synonyms.py", line 135, in _update_cache
+    caching.insert_word_cache_synonyms(self._word, pos_category, synonyms)
+  File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\utilities\caching.py", line 65, in insert_word_cache_synonyms
+    temporary_dict_synonyms[word][pos_category] += deduplicated_values
+
+2024-01-11 02:51:31:wordhoard.utilities.cloudflare_bypass:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:31:wordhoard.utilities.cloudflare_bypass:INFO: Cloudflare DDoS mitigation service protection bypass successful.
+2024-01-11 02:51:31:wordhoard.utilities.cloudflare_bypass:INFO: Requested URL: https://www.collinsdictionary.com/dictionary/english-thesaurus/deploy
+2024-01-11 02:51:31:wordhoard.utilities.cloudflare_bypass:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:31:wordhoard.synonyms:ERROR: A KeyError occurred in the following code segment:
+2024-01-11 02:51:31:wordhoard.synonyms:ERROR:   File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\synonyms.py", line 329, in _query_collins_dictionary
+    self._update_cache(part_of_speech_category, synonyms_list)
+  File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\synonyms.py", line 135, in _update_cache
+    caching.insert_word_cache_synonyms(self._word, pos_category, synonyms)
+  File "C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\wordhoard\utilities\caching.py", line 65, in insert_word_cache_synonyms
+    temporary_dict_synonyms[word][pos_category] += deduplicated_values
+
+2024-01-11 02:51:32:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:32:wordhoard.utilities.request_html:ERROR: Response Status Code: 404
+2024-01-11 02:51:32:wordhoard.utilities.request_html:INFO: The HTTP 404 Not Found status code means that the file or page that the was requested was not found on the server
+2024-01-11 02:51:32:wordhoard.utilities.request_html:INFO: Requested URL: https://www.thesaurus.com/browse/deploy
+2024-01-11 02:51:32:wordhoard.utilities.request_html:INFO: --------------------------------------------------------------------------------
+2024-01-11 02:51:32:wordhoard.antonyms:INFO: Thesaurus.com had no antonym reference for the word deploy
