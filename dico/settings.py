@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
-import dj_databse_url
+# import django_heroku
+# import dj_databse_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -111,13 +111,23 @@ WSGI_APPLICATION = 'dico.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd7uu697nrkhlom',
+        'USER': 'quasdtlyqcyrfr',
+        'PASSWORD': 'b18365545c1b4fcec87babbef55da1c1e4e1403dcb9331156441a2e543cf134b',
+        'HOST': 'ec2-54-234-13-16.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -155,7 +165,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR/ 'static')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -170,4 +180,4 @@ SESSION_COOKIE_SECURE = True  # Set this to True if using HTTPS
 
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
