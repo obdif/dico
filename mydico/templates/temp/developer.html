@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    {% include "temp/include/head.html" %}
+<body>
+    
+    <div class="dev-container history-container">
+        <button onclick ="goBack()" class="backBtn">
+            <i class="fas fa-arrow-left" id="iconx" style="color: blue; font-size:35px; font-weight:800;"></i>
+        </button>
+            <center><h1>Meet Our Developers</h1></center>
+        <p style="padding: 20px; margin-bottom:40px;font-weight:600; text-align:justify;">We are a team of four passionate developers who came together to create this powerful and user-friendly dictionary application. Our goal is to provide you with a seamless and enriching experience for all your language needs.</p>
+        <div class="dev">
+            <img src="{%static 'css/blessing-adekunle.jpg' %}" alt="">
+            <div class="dev-icons">
+                <a href="https://web.facebook.com/prince.adeola.10297" target='_blank'><i class="fab fa-facebook dev-icon"></a></i>
+                <a href="https://www.instagram.com/obdif_media/" target='_blank'><i class="fab fa-instagram dev-icon" ></a></i>
+                <a href="https://x.com/prince_adeola_?s=21" target='_blank'><i class="fab fa-twitter dev-icon"></a></i>
+                <a href="https://www.linkedin.com/in/adekunle-blessing-1a9876232/" target='_blank'><i class="fab fa-linkedin dev-icon"></a></i>
+            </div>  
+            <div class="caption">
+                <h2> Blessing Adekunle</h2>
+                <p>Full-Stack / Lead Developer</p>
+            </div>
+        </div>
+        <div class="flex">
+            <div class="dev">
+                <img src="{%static 'css/ayomide_taiwo.jpg' %}" alt="">
+                <div class="dev-icons">
+                    <a href="https://www.facebook.com/ayomide.taiwo.1401?mibextid=ZbWKwL" target='_blank'><i class="fab fa-facebook dev-icon"></a></i>
+                    <a href="https://www.instagram.com/haryomide2007?igsh=MmVlMjlkMTBhMg==" target='_blank'><i class="fab fa-instagram dev-icon" ></a></i>
+                    <a href="https://x.com/ayomi0105?t=5qUPSFKh9v4clKFdiTZ_hw&s=09" target='_blank'><i class="fab fa-twitter dev-icon"></a></i>
+                    <a href="https://www.linkedin.com/in/taiwo-ayomide-67682128a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target='_blank'><i class="fab fa-linkedin dev-icon"></a></i>
+                </div>  
+                <div class="caption">
+                    <h2> Ayomide Taiwo</h2>
+                    <p>UI Designer/ Backend Developer</p>
+                </div>
+            </div>
+            <div class="dev">
+                <img src="{% static 'css/ayoola_raheem.jpg' %}" alt="">
+                <div class="dev-icons">
+                    <a href=""><i class="fab fa-facebook dev-icon"></a></i>
+                    <a href=""><i class="fab fa-instagram dev-icon" ></a></i>
+                    <a href=""><i class="fab fa-twitter dev-icon"></a></i>
+                    <a href=""><i class="fab fa-linkedin dev-icon"></a></i>
+                </div>  
+                <div class="caption">
+                    <h2> Ayoola Raheem</h2>
+                    <p>Project Organizer/ Backend Developer</p>
+                </div>
+            </div>
+            <div class="dev">
+                <img src="{% static 'css/temiloluwa-gboyega.jpeg'%}" alt="">
+                <div class="dev-icons">
+                    <a href=""><i class="fab fa-facebook dev-icon"></a></i>
+                    <a href=""><i class="fab fa-instagram dev-icon" ></a></i>
+                    <a href=""><i class="fab fa-twitter dev-icon"></a></i>
+                    <a href=""><i class="fab fa-linkedin dev-icon"></a></i>
+                </div>  
+                <div class="caption">
+                    <h2> Temiloluwa Gboyega</h2>
+                    <p>Project Adviser/ Full-Stack Developer</p>
+                </div>
+            </div>
+        </div>
+
+        
+        <script>
+            function goBack(){
+                window.history.back();
+            }
+        </script>
+</body>
+</html>

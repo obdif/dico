@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "temp/include/head.html" %}
+{% load static %}
+<body >
+  <div class="index-page">
+    <div class="wrapper-b">
+
+      <div class="dico">
+        <div class="dico-image">
+          <img src="{% static "css/dico.png"%}" alt="" width="200px">
+        </div>
+        <h1 style="color: white;">MyDico</h1>
+      </div>
+
+      <div class="get-started">
+        <h2><a href="{% url  "index" %}" style="text-decoration: none; color: #00308f;">Get Started</a></h2>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} {% include "temp/include/footer.html" %} {% endcomment %}
+</body>
+
+</html>

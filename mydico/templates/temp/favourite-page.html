@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "temp/include/head.html" %}
+<body>
+    <div class="history-container mode range" id="mode range">
+        <div class="history-header">
+            <button onclick ="goBack()" class="backBtn">
+                <i class="fas fa-arrow-left" id="iconx" style="color: white; font-size:25px; font-weight:800;"></i>
+            </button>
+            {% comment %} <i class="fas fa-arrow-left" ></i> {% endcomment %}
+            <div class="history-title">
+                <h2>Favourite</h2>
+            </div>
+        </div>
+
+        <!-- <div class="clear-history">
+            <i class="fas fa-history"></i>
+            <p>Clear History</p>
+        </div> -->
+
+        <div class="history">
+            {% if favorite %}
+            {% for favor in favorite|slice:":-1000:-1" %}
+                <div class="history-card">
+                    <a href="/search/?wordSearch={{favor}}">
+                        <p>{{favor}}</p>
+                    </a>
+                    <form method="POST" action="{%url 'favourite'%}">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete" value="{{favor}}">   
+                        <button type='submit'><i class="fas fa-remove"></i></button>
+                    </form>
+                </div>
+            {% endfor %}
+            {% else %}
+            <div style="justify-content:center; text-align:center; color: rgb(215, 213, 213); margin-top: 25%;">
+                <i style="font-size:80px;" class="fa fa-star"></i>
+                <p> No Word Found, try adding a word to favorite.</p>
+            </div>
+           
+            {% endif %}
+        </div>
+        <script>
+            function goBack(){
+                window.history.back();
+            }
+        </script>
+      {% include "temp/include/footer.html" %}
+</body>
+</html>

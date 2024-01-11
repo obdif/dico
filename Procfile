@@ -1,0 +1,1 @@
+web gunicorn mydico.wsgi:apllication --log-file -

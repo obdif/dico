@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% include "temp/include/head.html" %}
+<body>
+    <div class="wrapper mode range" id="mode range">
+        <div class="top">
+            
+            <div class="name">MyDico  
+                 {% comment %} <span><button>{{username}}</button></span> {% endcomment %}
+                </div>
+            {% comment %} <form action="search">
+                <div class="searchbar">
+                    <button style="border: none; background: none;" type="submit">
+                        <div class="icon">
+                            <i class="fa fa-search"></i> 
+                        </div>
+                    </button>
+                        <div class="search-text">
+                            <input type="search" name = "wordSearch" placeholder="Search for new words">
+                        </div>
+                    
+                </div>
+            </form>  {% endcomment %}
+            <form id="searchForm" action="search">
+                <div class="searchbar">
+                    <button style="border: none; background: none;" type="submit">
+                        <div class="icon">
+                            <i class="fa fa-search"></i> 
+                        </div>
+                    </button>
+                    
+                    <div class="search-text">
+                        <input type="search" id="wordSearch" name="wordSearch" placeholder="Search for new words">
+                    </div>
+                </div>
+            </form>
+            
+            {% comment %} <div id="searchResults" class="suggestBox"></div> {% endcomment %}
+        </div>
+
+  
+
+        <div class="box-1">
+            <p>Words for you {{random_text}}</p><br>
+            <a href="/search/?wordSearch= {{random_word}}">
+            <div class="dayword">
+                <h1 name="dayword"> {{random_word}} </h1>
+                <div class="icon">
+                    <i class="fa fa-chevron-circle-right"></i>
+                </div>
+            </div>
+        </a>
+        </div>
+
+        <div class="box-2">
+
+            <p>Recent Search</p><br>
+
+            <div class="box-2scroll">
+                {% if request.session.history %}
+                    {% for recent in request.session.history|slice:":-5:-1" %}
+                    <div class="word-fav">
+                        <a href="/search/?wordSearch={{ recent }}">
+                            <p>{{recent}}</p>
+                        </a>
+                        {% comment %} <div class="fav-icon">
+                            <i class="fa fa-ellipsis-v" style="margin-right: 10px;"></i>
+                        </div> {% endcomment %}
+                    </div>
+                    {% endfor %}
+            
+                {% else %}
+                <h3><em style="color:red; font-size:25px;"> No word found, Try searching for a word.</em></h3>    
+                {% endif %}
+                
+            </div>
+
+        </div>
+
+    {% include "temp/include/footer.html" %}
+    {% load static %}
+{% comment %} <script src="{% static "scripts/script.js" %}"></script> {% endcomment %}
+
+<script>
+    
+// ==== RANDOM WORD OF THE DAY ==========
+
+{% comment %} function fetchNewWord() {
+
+    fetch('get_random_word')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('dayword').textContent = data.dayword;
+        });
+
+
+} {% endcomment %}
+// AN INTERVAL TIME FOR THE WORD DURATION 1000 = 1sec
+
+{% comment %} document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        window.location.reload(true);
+    }, 4000); 
+}); {% endcomment %}
+function fetchNewWord() {
+    const storedWord = localStorage.getItem('dayword');
+
+    if (storedWord) {
+        document.getElementById('dayword').textContent = storedWord;
+    } else {
+        fetch('get_random_word')
+            .then(response => response.json())
+            .then(data => {
+                const newWord = data.dayword;
+                document.getElementById('dayword').textContent = newWord;
+                localStorage.setItem('dayword', newWord);
+
+                // Set a timeout to clear the localStorage after 1 hour
+                setTimeout(function() {
+                    localStorage.removeItem('dayword');
+                }, 3600000); // 3600000 milliseconds = 1 hour
+            });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetchNewWord();
+});
+
+
+
+</script>
+
+</body>
+
+</html>

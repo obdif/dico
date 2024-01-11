@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include "temp/include/head.html" %}
+
+
+
+<body>
+    <div class="setting-page" id="setting-page">
+        <div class="history-header">
+            {% comment %} <button onclick ="goBack()" class="backBtn">
+                <i class="fas fa-arrow-left" id="iconx" style="color: white; font-size:25px; font-weight:800;"></i>
+            </button> {% endcomment %}
+            <div class="history-title">
+                <h2>Setting</h2>
+            </div>
+        </div>
+        <div class="setting-content mode range" id="mode range">
+           
+            <h2>General Setings</h2>
+            {% comment %} <div class="settings">
+                <p>Mode</p>
+                <i class="fa fa-adjust" id="theme-toggle"></i>
+            </div> {% endcomment %}
+           {% comment %} <a href="{%url 'signin' %}">
+            <div class="settings">
+                <p>Sign in</p>
+                <i class="fa fa-arrow-right"></i>
+            </div>
+            </a>   
+
+            <a href="{%url 'signup' %}">
+                <div class="settings">
+                    <p>Sign up </p>
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+            </a> {% endcomment %}
+
+            <a href="{%url 'history' %}">
+                <div class="settings">
+                    <p>History</p>
+                    <i class="fa fa-history"></i>
+                </div>
+            </a>
+          
+            <h2>Feedback and Reviews</h2>
+            <div class="settings">
+                <p>Ratings</p>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="settings">
+                <p>Send Feedback</p>
+                <i class="fa fa-comment"></i>
+            </div>
+            <h2>App Info</h2>
+            <a href="{%url 'developer' %}">
+                <div class="settings">
+                    <p>Developer</p>
+                </div>
+            </a>
+
+            <a href="{%url 'about' %}">
+                <div class="settings">
+                    <p>About</p>
+                </div>
+            </a>
+
+            <a href="{%url 'help' %}">
+                <div class="settings">
+                    <p>Help</p>
+                </div>
+            </a>
+
+            {% include "temp/include/footer.html" %}
+
+        </div>
+
+        <script>
+            function goBack(){
+                window.history.back();
+            }
+        </script>
+        
+
+
+
+
+</body>
+
+</html>

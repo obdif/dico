@@ -1,0 +1,36 @@
+{% load static %}
+<style>
+
+</style>    
+<div class="bottom">
+    <!-- <div class="line"></div> -->
+    <div class="icons">
+        <div class="foot-span">
+            <a href="{%url 'index'%}" class="icon_links">
+                <i class="fas fa-home"></i>
+                <div class='footer-span'>Home</div>
+            </a>
+        </div>
+        <!-- <div class="foot-span">
+            <a href="#" class="icon_links"><i class="fas fa-tags"></i></a>
+            <span>Home</span>
+        </div> -->
+        <div class="foot-span">
+            <a href="{%url 'favourite'%}" class="icon_links">
+                <i class="fas fa-star"></i>
+                <div class='footer-span'>Favourite</div>
+            </a>
+        </div>
+        <div class="foot-span">
+            <a href="{%url 'setting'%}" class="icon_links">
+                <i class="fas fa-gear"></i>
+                <div class='footer-span'>Setting</div>
+            </a>
+           
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="{%static "js/script.js"%}"></script>

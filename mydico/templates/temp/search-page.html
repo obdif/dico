@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include "temp/include/head.html" %}
+
+  
+<body> 
+    <div class="container mode range" id="mode range">
+        <div class="search-header">
+            {% comment %} <a href="{%url 'index' %}" style="color: white; font-size:18px;"> {% endcomment %}
+            <button onclick ="goBack()" class="backBtn">
+                <i class="fas fa-arrow-left" id="iconx" style="color: white; font-size:18px;"></i>
+            </button>
+
+            <form id="searchForm" action="{{search}}">
+                <div class="searchbar">
+                    <button style="border: none; background: none;" type="submit">
+                        <div class="icon">
+                            <i class="fa fa-search"></i> 
+                        </div>
+                    </button>
+                    
+                    <div class="search-text">
+                        <input type="search" id="wordSearch" name="wordSearch" placeholder="Search for new words">
+                    </div>
+                </div>
+            </form>
+
+{% comment %} <div id="searchResults"></div> {% endcomment %}
+          
+        </div>
+        <div class="search-container">
+            <div class="search-word">
+                <button onclick="pronounce('{{wordSearch}}')" style="font-size: 22px;">
+                    <i class="fas fa-volume-up" id="volume"></i>
+                </button>
+                <p style="text-transform: capitalize;">{{wordSearch}}</p>
+            </div>
+            <button class="star_btn">
+               <i class="fa fa-star star" id="star"></i>
+            </button>
+        </div>
+
+      
+
+        
+
+        <div class="search-content">
+            
+            <div class='dict-meaning'>
+
+
+
+                {% comment %} ===============NONUS===== {% endcomment %}
+                {% comment %} <h1>Search Results for "{{ wordSearch }}"</h1>
+{% if wordSearch != original_wordSearch %}
+    <p>Did you mean: "{{ original_wordSearch }}"?</p>
+{% endif %} {% endcomment %}
+
+
+            {% if not meaning %}
+
+                {% if definition %}
+                    <ol style="padding-left: 25px;">
+                        {% for define in definition %}
+                            <li>  {{ define }}  </li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <h3>Sorry ! <em style="color:red; font-size:25px;">{{wordSearch}}</em> is not found in Our Database, please verify that the word is spelled correctly.</h3> 
+
+                {% endif %}
+
+            {% else %}
+
+                <ol  style="padding-left: 25px;">
+                    {% for define in definition %}
+                        <li>  {{ define }}  </li>
+                    {% endfor %}
+                </ol>
+                
+                {% if not nouns  %}
+                
+                {% else  %}
+                    <br><br><h2 style="color: #00308f;">Noun:</h2><br>
+                    
+                    <ol style="padding-left: 25px;">
+                        {% for noun in nouns %}
+                            <li style="list-style-type: decimal;">  {{ noun }}  </li>
+                        {% endfor %}
+                    </ol>
+                    
+                {% endif %}
+
+
+                {% comment %} ===============VERBS===== {% endcomment %}
+
+
+                {% if not verbs  %}
+                
+                {% else  %}
+                    <br><br><h2 style="color: #00308f;">Verbs:</h2><br>
+                    {% for verb in verbs %}
+                        <ul style="padding-left: 25px;">
+                            <li>  {{ verb }}  </li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+
+                {% endif %}
+
+                {% comment %} ===============PRONOUNS===== {% endcomment %}
+
+
+                {% if not pronouns  %}
+                
+                {% else  %}
+                    <br><br><h2 style="color: #00308f;">Verbs:</h2><br>
+                    {% for pronoun in pronouns %}
+                        <ul style="padding-left: 25px;">
+                            <li>  {{ pronoun }}  </li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+
+
+                {% comment %} ===============ADJECTIVE===== {% endcomment %}
+
+
+                {% if not adjectives  %}
+                
+                {% else  %}
+                    <br><br><h2 style="color: #00308f;">Adjective:</h2><br>
+                    {% for adjective in adjectives %}
+                    <ul style="padding-left: 25px;">
+                        <li>  {{ adjective }}  </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
+
+
+
+
+                {% comment %} ===============PREPOSITIONS===== {% endcomment %}
+
+
+                {% if not prepositions  %}
+                
+                {% else  %}
+                    <br><br><h2 style="color: #00308f;">Verbs:</h2><br>
+                    {% for preposition in prepositions %}
+                    <ul style="padding-left: 25px;">
+                        <li>  {{ preposition }}  </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
+
+
+{% comment %} ================ADVERBS===== {% endcomment %}
+
+                {% if not adverbs  %}
+                
+                {% else  %}
+                    <br><br><h2 style="color: #00308f;">Adverbs:</h2><br>
+                    {% for adverb in adverbs %}
+                    <ul style="padding-left: 25px;">
+                        <li>  {{ adverb }}  </li>
+                    </ul>
+                    {% endfor %}
+
+                {% endif %}
+
+            </div>
+            
+
+            {% if synonyms %}
+            <div style="padding-bottom: 50px;"> 
+                <br><br><h2 style="color: #00308f;">Synonyms:</h2><br>
+                {% for synonym in synonyms %}
+                    <a style="color:purple; font-weight:bold; font-size: 18px; padding-left: 25px;" 
+                    href="/search/?wordSearch={{ synonym }}">{{ synonym }} </a>,
+                    {% endfor %}
+            </div>
+            {% endif %}
+
+
+            {% if antonyms %}
+                <div style="padding-bottom: 50px;">
+                    <br><br><h2 style="color: #00308f;  ">Antonyms:</h2><br>
+                    {% for antonym in antonyms %}
+                    <a style="color:purple; font-weight:bold; font-size: 18px; padding-left: 25px;" href="/search/?wordSearch={{ antonym }}">{{ antonym }} </a>,
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div class="bottom">
+                <!-- <div class="line"></div> -->
+                <div class="icons">
+                    <div class="foot-span">
+                        <a href="{%url 'index'%}" class="icon_links">
+                            <i class="fas fa-home"></i>
+                            <div class='footer-span'>Home</div>
+                        </a>
+                    </div>
+            
+                </div>
+            </div>
+            
+            {% comment %} <div class="icon-home" > {% endcomment %}
+                {% comment %} <center> {% endcomment %}
+                {% comment %} <div class="foot-spans" style=''>
+                    <a href="{%url 'index'%}" class="icon_links">
+                        <i class="fas fa-home"></i>
+                        <div class='footer-span'>Home</div>
+                    </a>
+                </div> {% endcomment %}
+            {% comment %} </center> {% endcomment %}
+            </div>
+            
+    <style>
+           
+.bottom{
+    display:flex;
+    justify-content:center;
+    bottom: 35px;
+    margin-left:-20px;
+    background-color: #f2f3f5;
+    position: fixed;
+    box-shadow: 0px -6px 50px rgba(222, 213, 213, .4);
+    margin-top: 5px;
+    max-width: 800px;
+    width: 100vw;
+    border-top: 2px solid #00308f;
+    padding: 10px;
+}
+        .icons{
+            border: 2px solid  #00308f;
+            width:fit-content;
+            position:fixed;
+            bottom:20px;
+            border-radius:100%;
+            padding:15px;
+            background:white;
+        }
+        {% comment %} .icon-home{
+            
+            position:fixed;
+            bottom:20px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            margin:0 25%;
+           
+        } {% endcomment %}
+        .foot-spans{
+            position:fixed;
+            margin:0 25%;
+            bottom:20px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border:2px solid blue; 
+            border-radius:50%; 
+            padding:9px;
+        }
+      
+    </style>
+
+        </div>
+       
+          
+        
+    </div>
+
+    <script>
+        function pronounce(wordSearch) {
+            fetch(`/pronounce/${wordSearch}`)
+                .then(data => {
+                    const audio = new Audio(URL.createObjectURL(new Blob([data])));
+                    audio.play();
+                });
+        }
+
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

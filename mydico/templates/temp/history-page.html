@@ -1,0 +1,153 @@
+{% comment %} <!DOCTYPE html> {% endcomment %}
+<html lang="en">
+    {% include "temp/include/head.html" %}
+    <style>
+   
+        .icon {
+            cursor: pointer;
+        }
+        
+        .options-container {
+            display: none;
+            position: absolute;
+            right: 5px;
+            background-color: #fff;
+            padding: 8px 6px;
+            text-align:center;
+            border:none;
+            box-shadow:-5px 5px  8px rgb(207, 207, 207);
+        }
+        
+        .icon-container:hover .options-container {
+            display: block;
+        }
+         
+        .options-container form{
+            {% comment %} margin:5px 1px 5px 1px; {% endcomment %}
+        }
+        .options-container button{
+            padding:5px;
+            border:none;
+            background:white-smoke;
+            width:100%;
+            font-weight:600;
+        }
+</style>
+<body>
+    <div class="history-container mode range" id="mode range">
+        <div class="history-header">
+
+            <button onclick ="goBack()" class="backBtn">
+                <i class="fas fa-arrow-left" id="iconx" style="color: white; font-size:25px;"></i>
+            </button>
+            <div class="history-title">
+                <h2>History</h2>
+            </div>
+        </div>
+
+        <center>
+            <form method = 'POST' action="{%url 'history'%}" >
+                {% csrf_token %}
+                <input type='hidden' name="clear_history" value="{{history}}">
+            <button type="submit" onclick="clearHistory()">
+                <div class="clear-history">
+                        <i class="fas fa-history"></i>
+                        <p>Clear History</p>
+                </div>
+            </button>
+        </form>
+        </center>
+
+
+        <div class="history">
+            {% if history %}
+            {% for his in history|slice:":-50:-1" %}
+            <div class="history-card">
+                <a href="/search/?wordSearch={{his}}">
+                    <p>{{his}}</p>
+                </a>
+                <div class="icon-container">
+                    <i class="fas fa-ellipsis-v icon-h" onclick="toggleOptions(this)" onclick="hideOptions()" style="margin-right: 10px;"></i>
+
+                    <div id="optionsContainer" class="options-container" >
+                        <form method="POST" action="{%url 'history'%}" style="margin-bottom:15px;">
+                            {% csrf_token %}
+                            <input type="hidden" name='addToFavorites' value="{{his}}">
+                            <button type="submit">Add to Favorites</button>
+
+                        </form>
+
+                        <form method="POST" action="{%url 'history'%}">
+                            {% csrf_token %}
+                            <input type="hidden" name='delete' value="{{his}}">
+                            <button type="submit">Delete</button>
+
+                        </form>
+
+                        {% comment %} <button onclick="addToFavorites(this)">Add to Favorites</button><br><br> {% endcomment %}
+                        {% comment %} <button><input type='submit' value="Delete" onclick="deleteItem(this)"> {% endcomment %}
+                        {% comment %} <button onclick="deleteItem(this)">Delete</button>              {% endcomment %}
+                    </div>
+                </div>
+                    
+            </div>
+            {% endfor %}
+            {% else %}
+            <div style="justify-content:center; text-align:center; color: rgb(215, 213, 213); margin-top: 25%;">
+                <i style="font-size:80px;" class="fa fa-history"></i>
+                <p> No Word Found, try searching a new word</p>
+            </div>
+           
+            {% endif %}
+        </div>
+        
+        {% include "temp/include/footer.html" %}
+
+    </div>
+
+
+</body>
+</html>
+<script>
+
+function clearHistory(){
+    window.confirm("Do you want clear your history?")
+}
+
+
+
+function toggleOptions(icon) {
+    var optionsContainer = icon.nextElementSibling; 
+    optionsContainer.style.display = optionsContainer.style.display === "none" ? "block" : "none";
+}
+
+function addToFavorites(icon) {
+    var row = icon.closest('.row');
+    //alert("Added to Favorites! " );
+
+    var optionsContainer = icon.closest('.icon-container').querySelector('.options-container');
+    optionsContainer.style.display = 'none';
+}
+
+function deleteItem(icon) {
+    var row = icon.closest('.row');
+    //alert("Deleted!");
+
+    var optionsContainer = icon.closest('.icon-container').querySelector('.options-container');
+    optionsContainer.style.display = 'none';
+}
+
+function hideOptions() {
+    var optionsContainer = document.getElementById("optionsContainer");
+    optionsContainer.style.display = "none";
+}
+
+
+
+
+
+    function goBack(){
+        window.history.back();
+    }
+
+</script>
