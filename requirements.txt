@@ -13,6 +13,7 @@ Django==4.2.6
 fontawesomefree==6.4.2
 futures==3.0.5
 goslate==1.5.4
+gunicorn==20.1.0
 idna==3.4
 lxml==4.9.3
 PyDictionary==2.0.1
