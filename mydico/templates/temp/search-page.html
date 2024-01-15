@@ -35,12 +35,18 @@
                 </button>
                 <p style="text-transform: capitalize;">{{wordSearch}}</p>
             </div>
-            <button class="star_btn">
-               <i class="fa fa-star star" id="star"></i>
-            </button>
+            {% comment %} <form method="POST"  >
+                {% csrf_token %} {% endcomment %}
+                <input type="hidden" name='addToFavorites' value="{{his}}">
+                <button type="submit" class="star_btn" style="cursor: not-allowed;">
+                    <i class="fa fa-star star" style="cursor: not-allowed;" id="star"></i>               
+                 </button>
+    
+            {% comment %} </form> {% endcomment %}
+       
         </div>
 
-      
+       
 
         
 
@@ -48,13 +54,6 @@
             
             <div class='dict-meaning'>
 
-
-
-                {% comment %} ===============NONUS===== {% endcomment %}
-                {% comment %} <h1>Search Results for "{{ wordSearch }}"</h1>
-{% if wordSearch != original_wordSearch %}
-    <p>Did you mean: "{{ original_wordSearch }}"?</p>
-{% endif %} {% endcomment %}
 
 
             {% if not meaning %}
@@ -67,13 +66,11 @@
                     </ol>
                 {% else %}
                     <h3>Sorry ! <em style="color:red; font-size:25px;">{{wordSearch}}</em> is not found in Our Database, please verify that the word is spelled correctly.</h3> 
-
                 {% endif %}
 
             {% else %}
-
                 <ol  style="padding-left: 25px;">
-                    {% for define in definition %}
+                    {% for define in word_meaning %}
                         <li>  {{ define }}  </li>
                     {% endfor %}
                 </ol>
@@ -174,7 +171,7 @@
             </div>
             
 
-            {% if synonyms %}
+           {% if synonyms %}
             <div style="padding-bottom: 50px;"> 
                 <br><br><h2 style="color: #00308f;">Synonyms:</h2><br>
                 {% for synonym in synonyms %}

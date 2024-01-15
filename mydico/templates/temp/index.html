@@ -102,31 +102,6 @@
         window.location.reload(true);
     }, 4000); 
 }); {% endcomment %}
-function fetchNewWord() {
-    const storedWord = localStorage.getItem('dayword');
-
-    if (storedWord) {
-        document.getElementById('dayword').textContent = storedWord;
-    } else {
-        fetch('get_random_word')
-            .then(response => response.json())
-            .then(data => {
-                const newWord = data.dayword;
-                document.getElementById('dayword').textContent = newWord;
-                localStorage.setItem('dayword', newWord);
-
-                // Set a timeout to clear the localStorage after 1 hour
-                setTimeout(function() {
-                    localStorage.removeItem('dayword');
-                }, 3600000); // 3600000 milliseconds = 1 hour
-            });
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    fetchNewWord();
-});
-
 
 
 </script>

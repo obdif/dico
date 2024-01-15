@@ -1,23 +1,16 @@
 from django.shortcuts import render, redirect
 from PyDictionary import PyDictionary
 import requests
-from wordhoard import Antonyms, Definitions, Synonyms
 import bs4
 import random
 import os
 from requests.exceptions import Timeout
 from mydico import models
-from django.contrib import messages
-from django.contrib.auth import authenticate,login
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
 from datetime import datetime, timedelta
 from django.utils import timezone
 from spellchecker import SpellChecker
 
-# from utils import Definitions 
-# from gtts import gTTS?
 import pyttsx3
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -30,17 +23,9 @@ def home(request):
     return render(request, 'temp/home.html')
 
 
-# def get_random_word():
-
-#     dictionary = PyDictionary()
-#     response = requests.get('https://random-word-api.herokuapp.com/word')
-#     random_word = response.json()[0]
-#     return random_word
-
 
 def history(request):
     
-    # historys = models.History.objects.order_by('-id')
     history = request.session.get('history', [])
     history_list = list(history)[-0:]
     request.session['history'] = history_list
@@ -93,23 +78,27 @@ def index(request):
     data_get_recent = models.History.objects.order_by('-id')[0:4]
     history = request.session.get('history', [])[0:4]
 
+    api_url = 'https://api.api-ninjas.com/v1/randomword'
+    headers={'X-Api-Key': 'FZku0qUWeSXfKbLG2R3gjA==SVLdjeQYIa9MbpvX'}
+    response = requests.get(api_url, headers=headers)
      
     try:
-        dictionary = PyDictionary()
-        response = requests.get('https://random-word-api.herokuapp.com/word')
-        random_word = response
-        random_word = response.json()[0]
-        
+        if response.status_code == requests.codes.ok:
+            dictionary = PyDictionary()
+            random_word_data = response.json()
+            random_word = random_word_data.get('word')
+        else:
+            random_word = "Something went wrong"
 
       
 
     except Timeout:   
-        random_word = "No Internet Connetion 😭"
+        random_word = "No Internet Connetion "
         meaning = None
         
         
     except requests.exceptions.RequestException as e:
-        random_word = "No Internet Connetion 😭"
+        random_word = "No Internet Connetion "
         meaning = None
         
     context = {
@@ -130,37 +119,51 @@ def index(request):
 def search(request):
 
     # ===== SEARCHING FOR WORDS AND FETCHING THE MEANING
-    wordSearch = request.GET['wordSearch']
+    wordSearch = request.GET.get('wordSearch', '')
     dictionary = PyDictionary
     meaning = dictionary.meaning(wordSearch)
     
-     
-    # Auto-correct the search term
-    spell = SpellChecker()
-    corrected_word = spell.correction(wordSearch)
+    # ----=======Adding Word to Favourite=========----
+    history = request.session.get('history', [])
+    favorites = request.session.get('favorites', [])
+    if request.method =='POST':
+        if 'addToFavorites' in request.POST:
+            favorite_word = request.POST['addToFavorites']
+            if favorite_word in history and favorite_word not in favorites:
+                favorites.append(favorite_word)
+        else:
+            ""
     
-        # Use the corrected word for searching definitions
-    # defi = Definitions(search_string=corrected_word)
-    # try:
-    #     definition = defi.find_definitions()
-    #     if definition and all(x is not None for x in definition):
-    #         part_of_speech = ''.join(set([x[1] for x in definition]))
-    #     else:
-    #         part_of_speech = ''
-    # except TypeError:
-    #     definition = []
-    #     part_of_speech = ''
+    request.session['history'] = history
+    request.session['favorites'] = favorites
+    request.session.modified=True
     
+    
+    
+    api_url =f"https://api.api-ninjas.com/v1/dictionary?word={wordSearch}"
+    headers={'X-Api-Key': 'FZku0qUWeSXfKbLG2R3gjA==SVLdjeQYIa9MbpvX'}
+    response = requests.get(api_url, headers=headers)
+    
+        
+    try:
+        if response.status_code == requests.codes.ok:
+            api_data = response.json()
+            if 'definition' in api_data:
+                word_meaning = api_data['definition']
+                word_meaning = word_meaning.split('\n')[:2]
+                
 
-    
-    
-    defi = Definitions(search_string=corrected_word)
-    definition = defi.find_definitions()
-    
+            else:
+                word_meaning = "Meaning not found in the API response."
+        else:
+            word_meaning = f"Failed to fetch data. Status code: {response.status_code}"
+    except Exception as e:
+        word_meaning = f"An error occurred: {str(e)}"
+
     history = request.session.get('history', [])
     
      #-===== TO ADD THE NEW SEARCHED INTO HISTORY====
-    history.append(corrected_word)
+    history.append(wordSearch)
     
     # Update the session with the new search history
     request.session['history'] = history
@@ -172,25 +175,25 @@ def search(request):
     models.History.objects.create(word = wordSearch)
   
      
-        
+    api_sys_ays_url = f"https://api.api-ninjas.com/v1/thesaurus?word={wordSearch}"
+    headers = {'X-Api-Key': 'FZku0qUWeSXfKbLG2R3gjA==SVLdjeQYIa9MbpvX'}
+    sys_ays_response = requests.get(api_sys_ays_url, headers=headers)
     
     
     try:
-        syn = Synonyms(search_string= wordSearch, output_format='list', )
-        synonyms_word = syn.find_synonyms()
-        synonyms = synonyms_word[:14]
-    except TypeError:
-        synonyms = []
-        
-        
-    try:    
-        anto = Antonyms(search_string= wordSearch, output_format='list', )
-        antonyms_word = anto.find_antonyms()
-        antonyms = antonyms_word[:10]
-    
-    except TypeError:
+        if sys_ays_response.status_code == requests.codes.ok:
+            sys_ays_data = sys_ays_response.json()
+            synonyms = sys_ays_data.get('synonyms', [])
+            antonyms = sys_ays_data.get('antonyms', [])
+        else:
+            synonyms = "Something went wrong"
+            antonyms =[]  
+
+    except Timeout:   
+        synonyms = "No Internet Connetion "
         antonyms = []
-          
+        
+    
     # the try below will try to get the meaning and if the word does not exit like yoruba name it will not pop out error
     #  ======= MAKE SURE YOU DO THE SAME FOR OTHER PART OF SPEECH ======
     
@@ -253,17 +256,17 @@ def search(request):
    
     
     context = {
-        'definition' : definition,
+        'word_meaning' : word_meaning,
         'meaning' : meaning, 
         'nouns' : nouns[0:5],
         'pronouns' : pronouns[0:5],
         'prepositions' : prepositions[0:5],
-        'synonyms' : synonyms,
-        'antonyms' : antonyms,
+        'synonyms' : synonyms[0:5],
+        'antonyms' : antonyms[0:6],
         'verbs' : verbs[0:5],
         'adjectives' : adjectives[0:5],
         'adverbs' : adverbs[0:5],
-        "wordSearch" : corrected_word, 
+        "wordSearch" : wordSearch, 
         "history" :  history, 
     }
     

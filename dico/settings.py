@@ -43,12 +43,7 @@ INSTALLED_APPS = [
     'mydico',
     'fontawesomefree',
     
-    # INSTALLING OAUTH IN THE APPP
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
+  
 ]
 
 
@@ -58,21 +53,7 @@ AUTHENTICATION_BACKENDS = [
 
 
 
-# SOCIALACCOUNT_PROVIDERS ={
-#     'google' :{
-#         'SCOPE' :[
-#             'profile', 'email',
-#         ],
-#         'AUTH_PARAMS':{
-#             'access_type': 'online',
-#         }
-#     }
-# }
 
-# SITE_ID = 1
-
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/'
 
 
 
@@ -111,23 +92,23 @@ WSGI_APPLICATION = 'dico.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7uu697nrkhlom',
-        'USER': 'quasdtlyqcyrfr',
-        'PASSWORD': 'b18365545c1b4fcec87babbef55da1c1e4e1403dcb9331156441a2e543cf134b',
-        'HOST': 'ec2-54-234-13-16.compute-1.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd7uu697nrkhlom',
+#         'USER': 'quasdtlyqcyrfr',
+#         'PASSWORD': 'b18365545c1b4fcec87babbef55da1c1e4e1403dcb9331156441a2e543cf134b',
+#         'HOST': 'ec2-54-234-13-16.compute-1.amazonaws.com',
+#         'PORT': '5432'
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
